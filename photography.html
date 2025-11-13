@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">Portfolio</span>
+                <span class="logo-bracket">]</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#interests" class="nav-link">Interests</a></li>
+                <li><a href="photography.html" class="nav-link active">Photography</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1 class="gallery-title">Photography</h1>
+            <p class="gallery-subtitle">Capturing moments, telling stories</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filters -->
+    <section class="gallery-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="landscape">Landscapes</button>
+                <button class="filter-btn" data-filter="portrait">Portraits</button>
+                <button class="filter-btn" data-filter="street">Street</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery">
+        <div class="container">
+            <div class="gallery-grid">
+                <!-- Photo 1 -->
+                <div class="gallery-item" data-category="landscape">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🏔️</div>
+                        <div class="placeholder-text">Mountain Vista</div>
+                        <div class="placeholder-overlay">
+                            <p>Landscape Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="gallery-item" data-category="portrait">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">👤</div>
+                        <div class="placeholder-text">Portrait Study</div>
+                        <div class="placeholder-overlay">
+                            <p>Portrait Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="gallery-item" data-category="street">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🌃</div>
+                        <div class="placeholder-text">Urban Night</div>
+                        <div class="placeholder-overlay">
+                            <p>Street Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="gallery-item" data-category="nature">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🌿</div>
+                        <div class="placeholder-text">Forest Path</div>
+                        <div class="placeholder-overlay">
+                            <p>Nature Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="gallery-item" data-category="landscape">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🌅</div>
+                        <div class="placeholder-text">Golden Hour</div>
+                        <div class="placeholder-overlay">
+                            <p>Landscape Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 6 -->
+                <div class="gallery-item" data-category="street">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🚶</div>
+                        <div class="placeholder-text">City Life</div>
+                        <div class="placeholder-overlay">
+                            <p>Street Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 7 -->
+                <div class="gallery-item" data-category="nature">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🦋</div>
+                        <div class="placeholder-text">Macro Detail</div>
+                        <div class="placeholder-overlay">
+                            <p>Nature Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 8 -->
+                <div class="gallery-item" data-category="portrait">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">📸</div>
+                        <div class="placeholder-text">Character Study</div>
+                        <div class="placeholder-overlay">
+                            <p>Portrait Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 9 -->
+                <div class="gallery-item" data-category="landscape">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🌊</div>
+                        <div class="placeholder-text">Coastal View</div>
+                        <div class="placeholder-overlay">
+                            <p>Landscape Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 10 -->
+                <div class="gallery-item" data-category="street">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🏙️</div>
+                        <div class="placeholder-text">Architecture</div>
+                        <div class="placeholder-overlay">
+                            <p>Street Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 11 -->
+                <div class="gallery-item" data-category="nature">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">🌺</div>
+                        <div class="placeholder-text">Botanical</div>
+                        <div class="placeholder-overlay">
+                            <p>Nature Photography</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 12 -->
+                <div class="gallery-item" data-category="landscape">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">⛰️</div>
+                        <div class="placeholder-text">Summit View</div>
+                        <div class="placeholder-overlay">
+                            <p>Landscape Photography</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <div class="lightbox-content">
+            <div class="lightbox-placeholder">
+                <p>Your stunning photography will go here</p>
+            </div>
+        </div>
+        <button class="lightbox-prev">&#10094;</button>
+        <button class="lightbox-next">&#10095;</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Built with passion using HTML5, CSS3, and vanilla JavaScript</p>
+                <p class="footer-theme">Inspired by Tokyo Night theme</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
