@@ -4,9 +4,10 @@ const cursor = document.querySelector('.cursor');
 
 if (typedTextSpan) {
     const textArray = [
-        'Partner Solutions Architect',
+        'Developer Experience Solutions Architect',
+        'AWS Cloud Architect',
         'GenAI Enthusiast',
-        'Developer Experience Advocate',
+        'Open Source Contributor',
         'Photographer',
         'Vinyl Collector',
         'Self-Hosting Aficionado'
