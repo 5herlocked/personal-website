@@ -1,0 +1,40 @@
+:80 {
+    # Root directory for static files
+    root * /usr/share/caddy
+
+    # Serve static files
+    file_server
+
+    # Enable compression
+    encode gzip zstd
+
+    # Enable browser caching for static assets
+    @static {
+        path *.css *.js *.jpg *.jpeg *.png *.gif *.ico *.svg *.woff *.woff2
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    # Security headers
+    header {
+        # Enable XSS protection
+        X-XSS-Protection "1; mode=block"
+
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+
+        # Clickjacking protection
+        X-Frame-Options "SAMEORIGIN"
+
+        # Referrer policy
+        Referrer-Policy "no-referrer-when-downgrade"
+
+        # Remove server header
+        -Server
+    }
+
+    # Log to stdout
+    log {
+        output stdout
+        format console
+    }
+}

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  portfolio:
+    image: caddy:alpine
+    container_name: portfolio
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/share/caddy:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - swag
+    expose:
+      - "80"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  swag:
+    external: true
