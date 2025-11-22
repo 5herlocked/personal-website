@@ -9,12 +9,11 @@ services:
       - ./:/usr/share/caddy:ro
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
-      - swag
+      - proxynet
     expose:
       - "80"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
 networks:
-  swag:
-    external: true
+  proxynet:
