@@ -188,12 +188,12 @@ services:
       - ./www:/usr/share/caddy:ro
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
-      - swag
+      - proxynet
     expose:
       - "80"
 
 networks:
-  swag:
+  proxynet:
     external: true
 EOF
 
