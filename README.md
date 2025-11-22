@@ -240,12 +240,12 @@ services:
       - /mnt/user/appdata/portfolio/www:/usr/share/caddy:ro
       - /mnt/user/appdata/portfolio/Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
-      - proxynet
+      - swag
     expose:
       - "80"
 
 networks:
-  proxynet:
+  swag:
     external: true
 ```
 
