@@ -1,0 +1,18 @@
+[
+  {
+    "id": "welcome-to-my-blog",
+    "title": "Welcome to My Blog",
+    "date": "2025-11-22",
+    "excerpt": "This is the first post on my new blog. Learn about what I'll be writing about and what to expect.",
+    "tags": ["welcome", "meta"],
+    "file": "welcome-to-my-blog.md"
+  },
+  {
+    "id": "getting-started-with-docker",
+    "title": "Getting Started with Docker",
+    "date": "2025-11-20",
+    "excerpt": "A beginner's guide to containerization with Docker. Learn the basics and deploy your first application.",
+    "tags": ["docker", "tutorial", "devops"],
+    "file": "getting-started-with-docker.md"
+  }
+]

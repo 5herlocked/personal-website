@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="post-title">Blog Post - Shardul Vaidya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog-styles.css">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">Shardul Vaidya</span>
+                <span class="logo-bracket">]</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#interests" class="nav-link">Interests</a></li>
+                <li><a href="photography.html" class="nav-link">Photography</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post Content -->
+    <article class="blog-post-container">
+        <div class="container">
+            <!-- Back to Blog Link -->
+            <a href="blog.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back to Blog
+            </a>
+
+            <!-- Post Header -->
+            <header class="post-header">
+                <h1 id="post-heading" class="post-heading">Loading...</h1>
+                <div class="post-meta">
+                    <time id="post-date" class="post-date"></time>
+                    <div id="post-tags" class="post-tags"></div>
+                </div>
+            </header>
+
+            <!-- Post Content -->
+            <div id="post-content" class="post-content">
+                <div class="loading">Loading post...</div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Shardul Vaidya. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="post.js"></script>
+</body>
+</html>
