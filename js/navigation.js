@@ -36,8 +36,10 @@ function createNavigation(activePage = '') {
 
     nav.innerHTML = navHTML;
 
-    // Setup mobile menu toggle after navigation is created
-    setupMobileMenu();
+    // Setup mobile menu toggle after DOM updates
+    requestAnimationFrame(() => {
+        setupMobileMenu();
+    });
 }
 
 // Setup mobile menu functionality
