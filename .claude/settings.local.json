@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

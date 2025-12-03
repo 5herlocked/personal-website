@@ -37,137 +37,8 @@
     <section class="gallery">
         <div class="container">
             <div class="gallery-grid">
-                <!-- Photo 1 -->
-                <div class="gallery-item" data-category="landscape">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🏔️</div>
-                        <div class="placeholder-text">Mountain Vista</div>
-                        <div class="placeholder-overlay">
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 2 -->
-                <div class="gallery-item" data-category="portrait">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">👤</div>
-                        <div class="placeholder-text">Portrait Study</div>
-                        <div class="placeholder-overlay">
-                            <p>Portrait Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 3 -->
-                <div class="gallery-item" data-category="street">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🌃</div>
-                        <div class="placeholder-text">Urban Night</div>
-                        <div class="placeholder-overlay">
-                            <p>Street Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 4 -->
-                <div class="gallery-item" data-category="nature">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🌿</div>
-                        <div class="placeholder-text">Forest Path</div>
-                        <div class="placeholder-overlay">
-                            <p>Nature Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 5 -->
-                <div class="gallery-item" data-category="landscape">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🌅</div>
-                        <div class="placeholder-text">Golden Hour</div>
-                        <div class="placeholder-overlay">
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 6 -->
-                <div class="gallery-item" data-category="street">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🚶</div>
-                        <div class="placeholder-text">City Life</div>
-                        <div class="placeholder-overlay">
-                            <p>Street Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 7 -->
-                <div class="gallery-item" data-category="nature">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🦋</div>
-                        <div class="placeholder-text">Macro Detail</div>
-                        <div class="placeholder-overlay">
-                            <p>Nature Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 8 -->
-                <div class="gallery-item" data-category="portrait">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">📸</div>
-                        <div class="placeholder-text">Character Study</div>
-                        <div class="placeholder-overlay">
-                            <p>Portrait Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 9 -->
-                <div class="gallery-item" data-category="landscape">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🌊</div>
-                        <div class="placeholder-text">Coastal View</div>
-                        <div class="placeholder-overlay">
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 10 -->
-                <div class="gallery-item" data-category="street">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🏙️</div>
-                        <div class="placeholder-text">Architecture</div>
-                        <div class="placeholder-overlay">
-                            <p>Street Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 11 -->
-                <div class="gallery-item" data-category="nature">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">🌺</div>
-                        <div class="placeholder-text">Botanical</div>
-                        <div class="placeholder-overlay">
-                            <p>Nature Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo 12 -->
-                <div class="gallery-item" data-category="landscape">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-icon">⛰️</div>
-                        <div class="placeholder-text">Summit View</div>
-                        <div class="placeholder-overlay">
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Photos will be loaded dynamically from data/photos.json -->
+                <div class="loading">Loading photos...</div>
             </div>
         </div>
     </section>
@@ -176,9 +47,7 @@
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close">&times;</button>
         <div class="lightbox-content">
-            <div class="lightbox-placeholder">
-                <p>Your stunning photography will go here</p>
-            </div>
+            <!-- Photo content will be loaded dynamically -->
         </div>
         <button class="lightbox-prev">&#10094;</button>
         <button class="lightbox-next">&#10095;</button>
@@ -195,6 +64,7 @@
     </footer>
 
     <script src="js/navigation.js"></script>
+    <script src="js/gallery.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

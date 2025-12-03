@@ -1,0 +1,27 @@
+# Images - only hosted on server, not committed
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.bmp
+*.svg
+*.tiff
+*.tif
+*.ico
+*.heic
+*.heif
+
+# Case variations
+*.JPG
+*.JPEG
+*.PNG
+*.GIF
+*.WEBP
+*.BMP
+*.SVG
+*.TIFF
+*.TIF
+*.ICO
+*.HEIC
+*.HEIF
