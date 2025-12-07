@@ -1,0 +1,11 @@
+services:
+  host-website:
+    name: Website Server
+    description: Hosts the personal website on port 8000
+    triggeredBy:
+      - postEnvironmentStart
+    commands:
+      start: |
+        gitpod environment port open 8000 --name Website --protocol http || true
+        uv run python -m http.server 8000
+      ready: curl -f http://localhost:8000 || exit 1
