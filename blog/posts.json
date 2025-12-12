@@ -1,18 +1,26 @@
 [
   {
+    "id": "devex-chronicles",
+    "title": "DevEx Chronicles: Building Arch Linux on ARM from Scratch",
+    "date": "2025-12-11",
+    "excerpt": "What started as a weekend project to install Linux on an unsupported laptop turned into a month-long deep dive into Arch Linux ARM, custom desktop environments, and learning how modern Linux actually works.",
+    "tags": ["linux", "arch", "devex", "sway", "arm"],
+    "file": "devex-chronicles.md"
+  },
+  {
+    "id": "bringing-bedrock-to-zed",
+    "title": "Bringing Bedrock's Model Choice to Minimalist Engineers",
+    "date": "2025-04-10",
+    "excerpt": "A quick story on integrating Bedrock with the Zed IDE and all the ways Rust made it amazing and a little painful. Six months of work to bring 39 serverless models to Zed.",
+    "tags": ["rust", "bedrock", "zed", "ide", "aws"],
+    "file": "bringing-bedrock-to-zed.md"
+  },
+  {
     "id": "welcome-to-my-blog",
     "title": "Welcome to My Blog",
     "date": "2025-11-22",
-    "excerpt": "This is the first post on my new blog. Learn about what I'll be writing about and what to expect.",
+    "excerpt": "This is where I write about things I'm working through, building, or just thinking about. Learning in public, or just being honest about the process.",
     "tags": ["welcome", "meta"],
     "file": "welcome-to-my-blog.md"
-  },
-  {
-    "id": "getting-started-with-docker",
-    "title": "Getting Started with Docker",
-    "date": "2025-11-20",
-    "excerpt": "A beginner's guide to containerization with Docker. Learn the basics and deploy your first application.",
-    "tags": ["docker", "tutorial", "devops"],
-    "file": "getting-started-with-docker.md"
   }
 ]
