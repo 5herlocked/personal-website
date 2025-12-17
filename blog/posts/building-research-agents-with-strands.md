@@ -71,11 +71,39 @@ Why? Because my pipeline is deterministic. It's always research â†’ assessment â
 
 Strands' approach is "model self determinism" - let the LLM figure out the workflow. That's great for dynamic scenarios, but for a fixed pipeline it's just overhead. Why pay for LLM calls to make decisions that are already known?
 
-I orchestrated the agents myself with a simple Python script:
+I orchestrated the agents myself with custom code:
 ```python
-research_output = research_agent.invoke(target, requirements)
-assessment_output = assessment_agent.invoke(research_output, criteria)
-report = report_agent.invoke(assessment_output, template)
+def process_target(target: ResearchTarget, requirements: Requirements) -> Report:
+    """Process a single research target through the full pipeline."""
+    # Research phase - gather data
+    research_output = research_agent.invoke(
+        target=target,
+        requirements=requirements
+    )
+    
+    # Write checkpoint
+    write_checkpoint(target.id, "research", research_output)
+    
+    # Assessment phase - score against criteria
+    assessment_output = assessment_agent.invoke(
+        research_data=research_output,
+        criteria=requirements.assessment_criteria,
+        weights=requirements.weights
+    )
+    
+    # Write checkpoint
+    write_checkpoint(target.id, "assessment", assessment_output)
+    
+    # Report generation phase - create final document
+    report = report_agent.invoke(
+        assessment_data=assessment_output,
+        template=requirements.report_template
+    )
+    
+    # Write final output
+    write_checkpoint(target.id, "report", report)
+    
+    return report
 ```
 
 Clean, predictable, debuggable.
@@ -101,6 +129,42 @@ I parallelized at the target level - run entire pipelines for multiple companies
 
 This was the right first move. Target-level parallelization is straightforward to implement and gives you linear speedup without the complexity of coordinating parallel tool calls or managing shared state.
 
+```python
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+from typing import List
+
+async def process_targets_parallel(
+    targets: List[ResearchTarget],
+    requirements: Requirements,
+    max_workers: int = 10
+) -> List[Report]:
+    """Process multiple targets in parallel with controlled concurrency."""
+    
+    def process_with_error_handling(target: ResearchTarget) -> Report:
+        try:
+            return process_target(target, requirements)
+        except Exception as e:
+            logger.error(f"Failed to process {target.id}: {e}")
+            # Write error checkpoint for debugging
+            write_checkpoint(target.id, "error", {"error": str(e)})
+            raise
+    
+    # Use ThreadPoolExecutor for I/O-bound operations
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        loop = asyncio.get_event_loop()
+        tasks = [
+            loop.run_in_executor(executor, process_with_error_handling, target)
+            for target in targets
+        ]
+        
+        # Gather results, allowing some to fail without stopping others
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+    # Filter out exceptions and return successful reports
+    return [r for r in results if isinstance(r, Report)]
+```
+
 The biggest run was 200 targets in parallel. The full pipeline - research, assessment, report generation for all 200 - took about 4 hours. That's roughly 72 seconds per target end-to-end, which means the parallelization was working well.
 
 ## The Perplexity Credit Incident
@@ -112,6 +176,86 @@ I hit my credit limit instead.
 Turns out when you're running 200 research pipelines in parallel, each making multiple Perplexity API calls for multiple requirements, the credits burn fast. Really fast. Emergency-purchase-more-credits-at-2am fast.
 
 I didn't build cost estimation before that run. I do now.
+
+## Building a TUI: Making Parallelization Visible
+
+Running 200 targets in parallel is great for throughput, but terrible for visibility. When everything runs concurrently, how do you know what's happening? Which targets are in research? Which are in assessment? Which failed?
+
+I built a Terminal User Interface (TUI) to visualize the entire pipeline in real-time. This turned out to be one of the most satisfying parts of the project.
+
+The challenge was implementing an observable pattern on top of Strands' existing observability. Strands already provides telemetry, traces, and logs - but I needed real-time updates for the UI without interfering with the agent execution.
+
+The solution was an event emitter pattern:
+
+```python
+from typing import Callable, Dict, List
+from enum import Enum
+
+class AgentEvent(Enum):
+    STARTED = "started"
+    RESEARCH_COMPLETE = "research_complete"
+    ASSESSMENT_COMPLETE = "assessment_complete"
+    REPORT_COMPLETE = "report_complete"
+    FAILED = "failed"
+
+class AgentObservable:
+    """Observable pattern for real-time agent status updates."""
+    
+    def __init__(self):
+        self._observers: Dict[str, List[Callable]] = {}
+    
+    def subscribe(self, event: AgentEvent, callback: Callable):
+        """Subscribe to agent events."""
+        if event.value not in self._observers:
+            self._observers[event.value] = []
+        self._observers[event.value].append(callback)
+    
+    def emit(self, event: AgentEvent, target_id: str, data: dict = None):
+        """Emit an event to all subscribers."""
+        if event.value in self._observers:
+            for callback in self._observers[event.value]:
+                callback(target_id, data or {})
+
+# Global observable instance
+agent_observable = AgentObservable()
+
+def process_target(target: ResearchTarget, requirements: Requirements) -> Report:
+    """Process a single target with observable events."""
+    agent_observable.emit(AgentEvent.STARTED, target.id)
+    
+    try:
+        # Research phase
+        research_output = research_agent.invoke(target=target, requirements=requirements)
+        write_checkpoint(target.id, "research", research_output)
+        agent_observable.emit(AgentEvent.RESEARCH_COMPLETE, target.id, 
+                            {"requirements_count": len(requirements)})
+        
+        # Assessment phase
+        assessment_output = assessment_agent.invoke(
+            research_data=research_output,
+            criteria=requirements.assessment_criteria
+        )
+        write_checkpoint(target.id, "assessment", assessment_output)
+        agent_observable.emit(AgentEvent.ASSESSMENT_COMPLETE, target.id,
+                            {"score": assessment_output.total_score})
+        
+        # Report generation phase
+        report = report_agent.invoke(assessment_data=assessment_output)
+        write_checkpoint(target.id, "report", report)
+        agent_observable.emit(AgentEvent.REPORT_COMPLETE, target.id)
+        
+        return report
+        
+    except Exception as e:
+        agent_observable.emit(AgentEvent.FAILED, target.id, {"error": str(e)})
+        raise
+```
+
+The TUI subscribed to these events and updated the display in real-time. I used the `rich` library for the terminal rendering - progress bars for each phase, a live table showing target status, and a scrolling log of events.
+
+Watching 200 targets flow through the pipeline simultaneously, seeing progress bars update as research completed, assessment scores populate, and reports generate - that was the moment it felt real. Not just a script running in the background, but a system you could observe and understand.
+
+The observable pattern also made debugging way easier. When a target failed, I could see exactly which phase it was in and what the last successful event was. The TUI became the primary interface for running large batches.
 
 ## Retry Logic: Because Everything Fails at Scale
 
@@ -148,21 +292,25 @@ This turns the linear pipeline into a feedback loop where agents can request mor
 
 **Parallelize at the highest level first.** Target-level parallelization is simple and gives you the most bang for your buck.
 
+**Build observability into the system, not just on top of it.** The observable pattern made the TUI possible and debugging trivial. Real-time visibility into agent execution is worth the extra code.
+
 **Build retry logic from the start.** At scale, everything fails. Exponential backoff and error differentiation are not optional.
 
 **Estimate costs before big runs.** Especially when you're hitting external APIs. Learn from my 2am credit purchase.
 
+**A good TUI makes complex systems understandable.** When you're running hundreds of parallel operations, being able to see what's happening in real-time changes how you interact with the system.
+
 ## The Current State
 
-Today, the system processes research targets in parallel, outputs structured JSON for visualization tools, and handles failures gracefully. It's not perfect - the assessment feedback loop is still on the roadmap - but it's production-ready for the use cases it was built for.
+Today, the system processes research targets in parallel, outputs structured JSON for visualization tools, and handles failures gracefully. The TUI provides real-time visibility into what's happening across hundreds of concurrent operations. It's not perfect - the assessment feedback loop is still on the roadmap - but it's production-ready for the use cases it was built for.
 
-The YAML-defined requirements make it flexible enough to adapt to new research criteria without rebuilding the agents. The structured outputs make it reliable enough to feed directly into downstream tools. The parallelization makes it fast enough to handle hundreds of targets in a single run.
+The YAML-defined requirements make it flexible enough to adapt to new research criteria without rebuilding the agents. The structured outputs make it reliable enough to feed directly into downstream tools. The parallelization makes it fast enough to handle hundreds of targets in a single run. The observable pattern makes it debuggable enough to actually understand what's happening when things go wrong.
 
-What started as "I need structured output for visualizations" turned into a system that taught me more about agent orchestration, API economics, and the difference between framework features and actual requirements than I expected.
+What started as "I need structured output for visualizations" turned into a system that taught me more about agent orchestration, API economics, real-time observability patterns, and the difference between framework features and actual requirements than I expected.
 
 Would I do it again? Absolutely. Would I recommend it to everyone? Not a chance. But if you're building research pipelines that need to scale, need structured outputs, and need to be flexible enough to adapt to changing requirements, this architecture works.
 
-Just remember to buy enough API credits before you kick off the 200-target run.
+Just remember to buy enough API credits before you kick off the 200-target run. And build the TUI early - watching your agents work in real-time is worth the effort.
 
 ---
 
