@@ -2,7 +2,7 @@
   {
     "id": "building-research-agents-with-strands",
     "title": "Building a Research Agent That Actually Scales",
-    "date": "2024-12-15",
+    "date": "2025-12-15",
     "excerpt": "Building an extensible research and analytics agent using Strands Agents, Bedrock, and Perplexity. From YAML-based requirements to processing 200 targets in parallel, and all the lessons learned along the way.",
     "tags": ["agents", "strands", "bedrock", "aws", "python"],
     "file": "building-research-agents-with-strands.md"
