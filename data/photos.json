@@ -1,16 +1,1 @@
-[
-  {
-    "id": "sample-landscape",
-    "file": "sample-landscape.jpg",
-    "category": "landscape",
-    "title": "Sample Landscape",
-    "description": "Replace this with your actual photos"
-  },
-  {
-    "id": "sample-portrait",
-    "file": "sample-portrait.jpg",
-    "category": "portrait",
-    "title": "Sample Portrait",
-    "description": "Add your photos to the images/ folder"
-  }
-]
+[]
