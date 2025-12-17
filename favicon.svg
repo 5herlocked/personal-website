@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7aa2f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bb9af7;stop-opacity:1" />
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Carattere&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#1a1b26" stroke="url(#grad)" stroke-width="2"/>
+  
+  <!-- Stylized 'SV' monogram with Carattere font - larger with clipping on both letters -->
+  <text x="42" y="72" font-family="'Carattere', cursive" font-size="70" fill="url(#grad)" text-anchor="middle">SV</text>
+</svg>
