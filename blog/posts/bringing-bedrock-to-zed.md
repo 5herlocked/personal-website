@@ -1,6 +1,6 @@
 # Bringing Bedrock's Model Choice to Minimalist Engineers
 
-*A quick story on integrating Bedrock with the Zed IDE and all the ways Rust made it amazing and a little painful.*
+_A quick story on integrating Bedrock with the Zed IDE and all the ways Rust made it amazing and a little painful._
 
 "It can't be that difficult, surely."
 
@@ -45,5 +45,5 @@ Shardul
 
 ---
 
-*Published: April 10, 2025*
-*Originally published on [AWS Builder Center](https://community.aws)*
+_Published: April 10, 2025_
+_Originally published on [AWS Builder Center](https://community.aws)_
